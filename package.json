@@ -1,0 +1,20 @@
+{
+	"name": "chatio3d",
+	"version": "1.0.0",
+	"description": "Simple 3d chat using Node.JS, Three.JS and Socket.IO",
+	"main": "server.mjs",
+	"type": "module",
+	"scripts": {
+		"dev": "nodemon server.mjs",
+		"start": "node server.mjs"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+        "express": "^4.21.2",
+        "socket.io": "^4.7.5"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.3"
+	}
+}

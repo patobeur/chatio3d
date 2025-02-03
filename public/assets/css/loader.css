@@ -1,0 +1,133 @@
+
+:root {
+    --nbballs: 5;
+    --circlew: 500px;
+    --ballw: calc(.5 * (var(--circlew) / var(--nbballs)));
+    --deg: calc((360/ var(--nbballs)) * 1deg);
+    --startsec: 0s;
+    --duration: .7s;
+    --delay: calc(var(--duration) / (var(--nbballs)/2));
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+  }
+    
+  #circle {
+    position: absolute;
+    top:50%;
+    left:50%;
+    width: var(--circlew);
+    height: var(--circlew);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: -webkit-radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+  
+  .balls {
+    position: absolute;
+    width: var(--circlew);
+    height: var(--ballw);
+    top: calc(50% - (var(--ballw)/2));
+    left: 0;
+  }
+  
+  .balls .ball {
+    position: absolute;
+    width: var(--circlew);
+    height: var(--ballw);
+  }
+  
+  .balls .ball div {
+    position: absolute;
+    width: var(--ballw);
+    height: var(--ballw);
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    box-shadow: 0 5px 5px black;
+    opacity: 0;
+  }
+  
+  .balls .ball.b1 div {
+    -webkit-animation: var(--duration) linear var(--startsec) infinite alternate slide;
+    animation: var(--duration) linear var(--startsec) infinite alternate slide;
+  }
+  
+  .balls .ball.b2 div {
+    -webkit-animation: var(--duration) linear calc(1 * var(--delay)) infinite alternate slide;
+    animation: var(--duration) linear calc(1 * var(--delay)) infinite alternate slide;
+  }
+  
+  .balls .ball.b3 div {
+    -webkit-animation: var(--duration) linear calc(2 * var(--delay)) infinite alternate slide;
+    animation: var(--duration) linear calc(2 * var(--delay)) infinite alternate slide;
+  }
+  
+  .balls .ball.b4 div {
+    -webkit-animation: var(--duration) linear calc(3 * var(--delay)) infinite alternate slide;
+    animation: var(--duration) linear calc(3 * var(--delay)) infinite alternate slide;
+  }
+  
+  .balls .ball.b5 div {
+    -webkit-animation: var(--duration) linear calc(4 * var(--delay)) infinite alternate slide;
+    animation: var(--duration) linear calc(4 * var(--delay)) infinite alternate slide;
+  }
+  
+  .balls .ball.b1 {
+    transform: rotate(calc(0 * var(--deg)));
+  }
+  
+  .balls .ball.b2 {
+    transform: rotate(calc(1 * var(--deg)));
+  }
+  
+  .balls .ball.b3 {
+    transform: rotate(calc(2 * var(--deg)));
+  }
+  
+  .balls .ball.b4 {
+    transform: rotate(calc(3 * var(--deg)));
+  }
+  
+  .balls .ball.b5 {
+    transform: rotate(calc(4* var(--deg)));
+  }
+  
+  
+  
+  @-webkit-keyframes slide {
+    0% {
+      left: 0%;
+      opacity: 0;
+          transform: rotate3d(1, 1, 1, calc( var(--deg) * -1) );
+    }
+  
+    15% {
+      opacity: 0;
+    }
+  
+    100% {
+      left: calc(100% - var(--ballw));
+      opacity: 1;
+          transform: scale(2);
+    }
+  }
+  
+  @keyframes slide {
+    0% {
+      left: 0%;
+      opacity: 0;
+          transform: rotate3d(1, 1, 1,  calc( var(--deg) * -1) );
+    }
+  
+    15% {
+      opacity: 0;
+    }
+  
+    100% {
+      left: calc(100% - (var(--ballw)*2));
+      opacity: 1;
+          transform: scale(2);
+    }
+  }
