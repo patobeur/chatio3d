@@ -25,7 +25,6 @@ body {
 	max-height: 100%;
 	left: 50%;
 	transform: translate(-50%);
-	background-color: rgba(255, 255, 255, 0.795);
 	padding: 1rem;
 }
 
@@ -268,6 +267,7 @@ body {
 	border: 1px solid rgb(121, 121, 121);
 	font-size: 1.1rem;
 	border-top: 0;
+	background-color: rgba(240, 248, 255, 0.637);
 }
 
 #chatio .chat-container .send-container button.send-button {
@@ -280,6 +280,7 @@ body {
 	border: 1px solid rgb(121, 121, 121);
 	border-left: none;
 	border-top: 0;
+	background-color: rgba(240, 248, 255, 0.637);
 }
 
 .roomers {
@@ -297,13 +298,13 @@ body {
 }
 
 @media screen and (max-height: 400px) {
-	body {
+	/* body {
 		background-image: url(/assets/logoChat.png);
 		background-attachment: fixed;
 		background-position: top center;
 		background-size: contain;
 		background-repeat: no-repeat;
-	}
+	} */
 
 	#chatio {
 		width: 100%;

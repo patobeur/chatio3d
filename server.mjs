@@ -141,6 +141,17 @@ io.on('connection', (socket) => {
 			_socketing.sendInitToPlayer()
 		}
 	})
+	socket.on('jesuispret', (value) => {
+		if (value === 1) {
+			console.log('--------------------------------')
+			console.log('--------------------------------')
+			console.log('--------------------------------')
+			console.log('------------jesuispret----------')
+			console.log('----- '+socket.id+' -----')
+			console.log('--------------------------------')
+			console.log('--------------------------------')
+		}
+	})
 	socket.on('enterRoom', ({ name, room, clientdatas = {} }) => {
 		let usersInRoomCount = UsersState.getUsersInRoom(room).length
 		if (usersInRoomCount < _rooms.maxUserPerRooms) {

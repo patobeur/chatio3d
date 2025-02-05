@@ -1,13 +1,17 @@
 "use strict";
-
+import * as THREE from "three";
 import { _board, _console, _genererCouleurHex } from './funcs/board.js'
 import { _front, } from './funcs/front.js'
 import { _keyboard, } from './funcs/keyboard.js'
 import { _resize, } from './funcs/resize.js'
+import { Game} from './game/game.js'
+import { GameCom} from './game/gameCom.js'
 
 let _client = {
 	socket: undefined,
 	user: undefined,
+	game: Game,
+	gameCom: GameCom,
 	users: {},
 	rooms: {},
 	activityTimer: false,
@@ -19,6 +23,18 @@ let _client = {
 		this.socket = paquet.socket
 		this.socketRun();
 		this.sendRequestInit();
+	},
+	//-----------------------------------------
+	initGame: function () {
+		
+		// this.user = paquet.user
+		// this.users = paquet.users
+		// this.map = paquet.map
+
+		console.log('this.Feun',this.user,this.user,this.map)
+		let GDatas = {Ammo:Ammo,user:this.user,users:this.users,map:this.map}
+		this.game.init(Ammo)
+		this.gameCom.init(GDatas,this.socket)
 	},
 	//-----------------------------------------
 	set_callBackFunctions: function () {
@@ -124,6 +140,8 @@ let _client = {
 			_board.add_roomers({ user: this.user, users: this.users })
 
 			_resize.init( )
+			this.initGame()
+			
 		})
 
 		// Listen for message send
@@ -143,7 +161,7 @@ let _client = {
 	},
 	//-----SEND------------
 	sendRequestInit: function () {
-		console.log('Requesting Acces !')
+		console.log('Requesting Access !')
 		this.socket.emit('requestAccess', 1)
 	},
 	sendEnterRoom: function (room) {

@@ -10,7 +10,7 @@ const _board = {
 		this.divs['tankioDiv'] = document.getElementById('chatio')
 		this.divs['tankioDiv'].textContent = '';
 
-		this.divs['logo'] = _front.createDiv({ tag: 'img', attributes: { src: 'assets/logoChat.png', className: 'chat-logo', }, style: {width:'100%'} })
+		this.divs['logo'] = _front.createDiv({ tag: 'img', attributes: { src: 'assets/logoChat.png', className: 'chat-logo', }, style: {width:'20vw'} })
 		this.divs['clientContainer'] = _front.createDiv({ tag: 'div', attributes: { className: 'client-container', }, style: {} })
 
 		this.divs['tankioDiv'].appendChild(this.divs['logo']);

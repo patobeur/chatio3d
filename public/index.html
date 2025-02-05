@@ -7,7 +7,18 @@
 		<title>ChatIo3D</title>
 		<link id="cssloader" rel="stylesheet" href="./assets/css/loader.css">
 		<link rel="stylesheet" href="./assets/css/style.css">
+		<script src="/node_modules_min/three/examples/jsm/libs/ammo.wasm.js"></script>
 		<script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
+		<script src="js/game/vendor/threex.domevents.js"></script>
+		<script src="js/game/vendor/threex.linkify.js"></script>
+		<script type="importmap">
+			{
+			  "imports": {
+				"three": "/node_modules_min/three/build/three.module.js",
+				"three/addons/": "/node_modules_min/three/examples/jsm/"
+			  }
+			}
+		</script>
 		<script defer type="module" src="./js/main.js"></script>
 	</head>
 
