@@ -3,7 +3,8 @@ import * as THREE from "three";
 import { _front } from './loaders.js';
 let _Engine = {
 	// INIT
-	init: function (_ModelsManager) {
+	init: function (_ModelsManager,callbackKeyBoard) {
+		this.callbackKeyBoard = callbackKeyBoard
 		this._ModelsManager = _ModelsManager
 		this.max = this.GEARS.length - 1
 		this.add_board()
@@ -73,6 +74,7 @@ let _Engine = {
 	powerUp: function () {
 		if (this.delay.cur === 0) {
 			if (this.status.currentGear < this.max) {
+				this.callbackKeyBoard ( 'powerUp=true')
 				this.status.currentGear++;
 				this.set_engineStatus()
 			}
@@ -81,9 +83,10 @@ let _Engine = {
 			this.boards['board_speed_emoji'].classList.add('active')
 		}
 	},
-	powerDown: function () {
+	powerDown: function (recoltActions) {
 		if (this.delay.cur === 0) {
 			if (this.status.currentGear > 0) {
+				this.callbackKeyBoard ( 'powerDown=true')
 				this.status.currentGear--;
 				this.set_engineStatus()
 			}
@@ -91,6 +94,7 @@ let _Engine = {
 			this.refresh_board()
 			this.boards['board_speed_emoji'].classList.add('active')
 		}
+		return recoltActions
 	},
 	// UPDATER for delay reset
 	update: function () {
@@ -109,7 +113,8 @@ let _Shoot = {
 	projectileType: 'basic',
 	projectilOrigine: undefined,
 	projectiles: [], // Tableau pour suivre les projectiles actifs
-	init: function (playerMesh, playerTurret, _scene, _physics) {
+	init: function (playerMesh, playerTurret, _scene, _physics, callbackKeyBoard) {
+		this.callbackKeyBoard = callbackKeyBoard
 		this.playerMesh = playerMesh;
 		this.playerTurret = playerTurret;
 		this._physics = _physics;
@@ -233,7 +238,8 @@ let _Shoot = {
 				body: body,
 				startTime: now
 			});
-			console.log('proj', modelDatas.mesh.name);
+			this.callbackKeyBoard('shooooot')
+			// console.log('proj', modelDatas.mesh.name);
 
 			return true;
 		}

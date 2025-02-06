@@ -2,7 +2,7 @@
 import * as THREE from "three";
 import { _board, _console, _genererCouleurHex } from './funcs/board.js'
 import { _front, } from './funcs/front.js'
-import { _keyboard, } from './funcs/keyboard.js'
+import { _keyboard } from './funcs/keyboard.js'
 import { _resize, } from './funcs/resize.js'
 import { Game} from './game/game.js'
 import { GameCom} from './game/gameCom.js'

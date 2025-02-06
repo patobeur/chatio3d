@@ -45,52 +45,52 @@ let _keyboard = {
 		console.log('_keyboard activated');
 	},
 }
-let _keyboardV2 = {
-	move: { x: 0, y: 0 },
-	actions: {},
-	keyMap: {},
-	tchatActive: false,
-	onDocumentKey: function (e, tchatActive) {
-		// console.log('onDocumentKey tchatActive', tchatActive)
-		if (tchatActive === false) {
-			// console.log('keydown')
-			if (e.type === "keydown" || e.type === "keyup") {
-				_keyboard.keyMap[e.code] = e.type === "keydown";
-			}
-			_keyboard.actions.moveForward = (_keyboard.keyMap["KeyW"] || _keyboard.keyMap["ArrowUp"]);
-			_keyboard.actions.moveBackward = (_keyboard.keyMap["KeyS"] || _keyboard.keyMap["ArrowDown"]);
-			_keyboard.actions.moveLeft = (_keyboard.keyMap["KeyA"] || _keyboard.keyMap["ArrowLeft"]);
-			_keyboard.actions.moveRight = (_keyboard.keyMap["KeyD"] || _keyboard.keyMap["ArrowRight"]);
+// let _keyboardV2 = {
+// 	move: { x: 0, y: 0 },
+// 	actions: {},
+// 	keyMap: {},
+// 	tchatActive: false,
+// 	onDocumentKey: function (e, tchatActive) {
+// 		// console.log('onDocumentKey tchatActive', tchatActive)
+// 		if (tchatActive === false) {
+// 			// console.log('keydown')
+// 			if (e.type === "keydown" || e.type === "keyup") {
+// 				_keyboard.keyMap[e.code] = e.type === "keydown";
+// 			}
+// 			_keyboard.actions.moveForward = (_keyboard.keyMap["KeyW"] || _keyboard.keyMap["ArrowUp"]);
+// 			_keyboard.actions.moveBackward = (_keyboard.keyMap["KeyS"] || _keyboard.keyMap["ArrowDown"]);
+// 			_keyboard.actions.moveLeft = (_keyboard.keyMap["KeyA"] || _keyboard.keyMap["ArrowLeft"]);
+// 			_keyboard.actions.moveRight = (_keyboard.keyMap["KeyD"] || _keyboard.keyMap["ArrowRight"]);
 
-			// console.log('this.actions', e.code)
-			_keyboard.checkMooves()
-		}
-	},
-	checkMooves: function () {
-		_keyboard.move = { x: 0, y: 0 }
-		_keyboard.actions.ismoving = false
-		if (_keyboard.actions.moveForward) { _keyboard.move.y = - 1; _keyboard.actions.ismoving = true; }
-		if (_keyboard.actions.moveBackward) { _keyboard.move.y = 1; _keyboard.actions.ismoving = true; }
-		if (_keyboard.actions.moveLeft) { _keyboard.move.x = - 1; _keyboard.actions.ismoving = true; }
-		if (_keyboard.actions.moveRight) { _keyboard.move.x = 1; _keyboard.actions.ismoving = true; }
-	},
-	resetMoves: function () {
-		this.setActions()
-		this.setKeyMap()
-	},
-	setActions: function () {
-		this.actions = { moveForward: false, moveBackward: false, moveLeft: false, moveRight: false, turnLeft: false, turnRight: false, jump: false, isjumping: false, ismooving: false, rotating: false }
-	},
-	setKeyMap: function () {
-		this.keyMap = { KeyW: false, KeyS: false, KeyA: false, KeyD: false, KeyQ: false, KeyE: false, Space: false, ArrowRight: false, ArrowLeft: false, ArrowUp: false, ArrowDown: false };
-	},
-	init: function () {
-		this.setActions()
-		this.setKeyMap()
-		document.addEventListener("keydown", (e) => { this.onDocumentKey(e, this.tchatActive) }, true);
-		document.addEventListener("keyup", (e) => { this.onDocumentKey(e, this.tchatActive) }, true);
-	},
-}
+// 			// console.log('this.actions', e.code)
+// 			_keyboard.checkMooves()
+// 		}
+// 	},
+// 	checkMooves: function () {
+// 		_keyboard.move = { x: 0, y: 0 }
+// 		_keyboard.actions.ismoving = false
+// 		if (_keyboard.actions.moveForward) { _keyboard.move.y = - 1; _keyboard.actions.ismoving = true; }
+// 		if (_keyboard.actions.moveBackward) { _keyboard.move.y = 1; _keyboard.actions.ismoving = true; }
+// 		if (_keyboard.actions.moveLeft) { _keyboard.move.x = - 1; _keyboard.actions.ismoving = true; }
+// 		if (_keyboard.actions.moveRight) { _keyboard.move.x = 1; _keyboard.actions.ismoving = true; }
+// 	},
+// 	resetMoves: function () {
+// 		this.setActions()
+// 		this.setKeyMap()
+// 	},
+// 	setActions: function () {
+// 		this.actions = { moveForward: false, moveBackward: false, moveLeft: false, moveRight: false, turnLeft: false, turnRight: false, jump: false, isjumping: false, ismooving: false, rotating: false }
+// 	},
+// 	setKeyMap: function () {
+// 		this.keyMap = { KeyW: false, KeyS: false, KeyA: false, KeyD: false, KeyQ: false, KeyE: false, Space: false, ArrowRight: false, ArrowLeft: false, ArrowUp: false, ArrowDown: false };
+// 	},
+// 	init: function () {
+// 		this.setActions()
+// 		this.setKeyMap()
+// 		document.addEventListener("keydown", (e) => { this.onDocumentKey(e, this.tchatActive) }, true);
+// 		document.addEventListener("keyup", (e) => { this.onDocumentKey(e, this.tchatActive) }, true);
+// 	},
+// }
 let _keyboard3D = {
 	_player: undefined,
 	actions: {},
@@ -131,7 +131,8 @@ let _keyboard3D = {
 			// }
 		}
 	},
-	init: function (_player) {
+	init: function (_player,callbackKeyBoard) {
+		this.callbackKeyBoard = callbackKeyBoard
 		this._player = _player
 		this.setActions()
 		this.setKeyMap()
@@ -142,4 +143,4 @@ let _keyboard3D = {
 
 	},
 }
-export { _keyboard3D, _keyboard }
+export { _keyboard,_keyboard3D}

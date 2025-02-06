@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { _scene, } from './scene.js'
 import { _OrbitControls } from './OrbitControls.js';
 import { _Engine, _Shoot } from './Engine.js';
-import { _keyboard, _keyboard3D } from '../funcs/keyboard.js'
+import { _keyboard3D } from '../funcs/keyboard.js'
 import { _front,  } from '../funcs/front.js'
 
 let _player = {
@@ -44,8 +44,8 @@ let _player = {
 		// mask: DEFAULT_MASK
 	},
 	// ---------------- ----------------
-	init: function (_physics, _GLTFLoader, _ModelsManager) {
-
+	init: function (_physics, _GLTFLoader, _ModelsManager, callbackKeyBoard) {
+		this.callbackKeyBoard = callbackKeyBoard
 		let stringCss = '#menuPanel {position: absolute;background-color: rgba(255, 255, 255, 0.25);top: 0px;left: 0px;}'
 		stringCss += '#startButton {height: 50px;width: 200px;position: relative;font-size: 32px;background-color: rgba(255, 255, 255, 1);text-align: center;}'
 		stringCss += '#instructions {color: white;position: absolute;right: 0;padding: 1rem;font-family: monospace;background-color: rgba(0, 0, 0, 0.651);}'
@@ -71,17 +71,17 @@ let _player = {
 		this.playerMesh.add(this.playerTank)
 
 
-		console.log(this._ModelsManager.allMeshsAndDatas)
+		// console.log(this._ModelsManager.allMeshsAndDatas)
 
 
-		// this.config.animatedMesh = this._ModelsManager.allMeshsAndDatas.character['Kimono_Female'].mesh
-		// this.config.animatedMesh.position.y -= this.config[this.config.shapeType].y / 2
+		this.config.animatedMesh = this._ModelsManager.allMeshsAndDatas.character['Kimono_Female'].mesh
+		this.config.animatedMesh.position.y -= this.config[this.config.shapeType].y / 2
 
-		// this.playerMesh.add(this.config.animatedMesh)
+		this.playerMesh.add(this.config.animatedMesh)
 
-		_keyboard3D.init(_player)
-		_Shoot.init(this.playerMesh, this.playerTurret, _scene, _physics)
-		_Engine.init(this._ModelsManager)
+		_keyboard3D.init(_player,this.callbackKeyBoard)
+		_Shoot.init(this.playerMesh, this.playerTurret, _scene, _physics,this.callbackKeyBoard)
+		_Engine.init(this._ModelsManager,this.callbackKeyBoard)
 
 		this.initiated = true
 	},
@@ -144,12 +144,15 @@ let _player = {
 		document.body.appendChild(this.menuPanel)
 		this.startButton.addEventListener("click", () => { _scene.renderer.domElement.requestPointerLock(); }, false);
 	},
-	update: function (deltaTime, time) {
-		_Shoot.update(deltaTime, time)
-		this.checkActions(deltaTime, time)
-	},
-	checkActions: function (deltaTime, time) {
+	// update: function (deltaTime, time) {
+	// 	_Shoot.update(deltaTime, time)
+	// 	this.checkActions(deltaTime, time)
+	// },
+	checkActions: function (deltaTime) {
 
+		let RecoltActions = {
+
+		}
 		let cube = this.config.mesh
 		this.inputVelocity = new THREE.Vector3(0, 0, 0);
 
@@ -172,8 +175,8 @@ let _player = {
 		// AVANT ARRIERE
 		let forward = new THREE.Vector3(0, 0, 1).applyQuaternion(cube.quaternion).normalize();
 		if (_keyboard3D.actions.moveForward || _keyboard3D.actions.moveBackward) {
-			if (_keyboard3D.actions.moveForward) _Engine.powerUp();
-			else if (_keyboard3D.actions.moveBackward) _Engine.powerDown();
+			if (_keyboard3D.actions.moveForward) _Engine.powerUp(RecoltActions);
+			else if (_keyboard3D.actions.moveBackward) _Engine.powerDown(RecoltActions);
 		}
 
 		if (_Engine.status.power !== 0) {
@@ -292,11 +295,11 @@ let _player = {
 
 	}
 }
-let animateChar = {
-	datas: {},
-	init: function () {
+// let animateChar = {
+// 	datas: {},
+// 	init: function () {
 
-	}
+// 	}
 
-}
+// }
 export { _player }

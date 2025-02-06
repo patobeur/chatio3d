@@ -10,7 +10,7 @@ class ModelsManager {
 			fullName: 'Alice',
 			category: 'character',
 			path: '/assets3d/gltf/toon/Kimono_Female.gltf',
-			positions: { x: 0, y: 0, z: -2 },
+			positions: { x: 0, y: 2, z: 0 },
 			rotations: { x: false, y: false, z: false },
 			scales: { x: 0.4, y: 0.4, z: 0.4 },
 			anime: 'Idle'
@@ -20,7 +20,7 @@ class ModelsManager {
 			fullName: 'Bob',
 			category: 'character',
 			path: '/assets3d/gltf/toon/Kimono_Male.gltf',
-			positions: { x: 0, y: 0, z: -2 },
+			positions: { x: 0, y: 2, z: 0 },
 			rotations: { x: false, y: false, z: false },
 			scales: { x: 0.4, y: 0.4, z: 0.4 },
 			anime: 'Idle'
@@ -77,7 +77,7 @@ class ModelsManager {
 
 		MODEL.changeAnimation = (newAnimName) => {
 			if (this.currentAnimation != newAnimName) {
-				console.log(this.currentAnimation + ' to ' + newAnimName)
+				console.log('...')//this.currentAnimation + ' to ' + newAnimName)
 				this.currentAnimation = newAnimName;
 				this.MegaClip = THREE.AnimationClip.findByName(
 					MODEL.gltf.animations,
